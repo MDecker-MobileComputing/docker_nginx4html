@@ -1,0 +1,9 @@
+
+body {
+    font-family: sans-serif;  /* Alle Schriften ohne Serifen */
+    font-size: 150%;
+    margin: 1em; /* Außenabstand */
+}
+h1 {
+    margin-bottom: 1.5em;
+}
