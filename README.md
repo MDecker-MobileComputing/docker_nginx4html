@@ -3,8 +3,8 @@
 <br>
 
 Das Repo enthält im Wurzelverzeichnis ein [Dockerfile](./Dockerfile), welches
-das Image `nginx:alpine` als Basis-Image verwendet.
-Das Image enthält also als Betriebs-System [Alpine Linux](https://www.alpinelinux.org/)
+das Image `nginx:latest` als Basis-Image verwendet.
+Das Image enthält also als Betriebs-System [Debian Linux](https://www.debian.org/)
 und den Webserver [nginx](https://nginx.org/en/).
 Das `Dockerfile` kopiert den Web-Content aus dem Unterverzeichnis [docs/](docs/)
 in den Ordner `/usr/share/nginx/html/` im Image, weil dies der Ordner für den von
@@ -22,7 +22,7 @@ in den Ordner `/usr/share/nginx/html/` im Image, weil dies der Ordner für den v
 
 <br>
 
-Führen Sie den folgenden Befehl im Verzeichnis mit dem `Dockerfile` aus, um das Image zu erstellen:
+Führen Sie den folgenden Befehl im Verzeichnis mit dem [Dockerfile](./Dockerfile) aus, um das Image zu erstellen:
 ```
 docker build -t nginx4html:0.9 .
 ```
@@ -59,7 +59,7 @@ docker container ls
 
 <br>
 
-Die Webseite im Ordner `docs/` sollte dann unter der folgenden lokalen URL im Web-Browser erreichbar sein:
+Die Webseite aus dem Ordner [docs/](docs/) dieses Repos sollte dann unter der folgenden lokalen URL im Web-Browser erreichbar sein:
 ```
 http://localhost:8080/
 ```
@@ -104,7 +104,7 @@ Die in dem Container laufenden Prozesse können Sie sich mit dem folgenden Befeh
 docker container top mein-webserver-1
 ```
 
-Es gibt auch einen Befehl um sich ausgeben zu lassen, welche Dateien der Container im Vergleich zum Image geändert hat:
+Der folgende Befehl listet die Dateien auf, welche sich im Container im Vergleich zu Image geändert haben:
 ```
 docker container diff mein-webserver-1
 ```
@@ -152,7 +152,7 @@ Der gestoppte Container kann mit folgendem Befehl gelöscht werden:
 docker container rm mein-webserver-1
 ```
 
-Um *ALLE** gestoppten Container zu löschen kann der folgende Befehl eingegeben werden (gefährlich!):
+Um *ALLE* gestoppten Container zu löschen kann der folgende Befehl eingegeben werden (gefährlich!):
 ```
 docker container prune
 ```
@@ -175,9 +175,14 @@ Im weiteren Beispiel ist dieser `mide76`.
 Legen Sie sich auf der Weboberfläche ein Repository an.
 Dieser Repo-Name ist für das weitere Beispiel `nginx4html`.
 
-Geben Sie den folgenden Befehl ein, um dem Image den Namen `mide76/nginx4html` zu geben:
+Geben Sie den folgenden Befehl ein, um dem Image den Namen `mide76/nginx4html` zu geben (also `<nutzer>/<reponame>`):
 ```
 docker tag nginx4html mide76/nginx4html
+```
+
+Loggen Sie sich dann auf der Konsole mit Ihrem Docker-Konto ein:
+```
+docker login
 ```
 
 Sie können dann das Image mit folgendem Befehl auf den Server hochladen:
@@ -191,3 +196,15 @@ Andere Nutzer können die neueste Version dieses Image dann mit dem folgenden Be
 ```
 docker pull mide76/nginx4html:latest
 ```
+
+<br>
+
+----
+
+## License ##
+
+<br>
+
+See the [LICENSE file](LICENSE.md) for license rights and limitations (BSD 3-Clause License).
+
+<br>
