@@ -158,3 +158,36 @@ docker container prune
 ```
 
 <br>
+
+----
+
+## Image auf *Docker Hub* veröffentlichen ##
+
+<br>
+
+Wenn Sie das Image auf [Docker Hub](https://hub.docker.com/) veröffentlichen möchten, dann gehen Sie wie folgt beschrieben vor.
+Sie können aber auch die [offizielle Dokumentation](https://docs.docker.com/get-started/04_sharing_app/) lesen.
+
+Legen Sie sich ein (kostenloses) Konto auf *Docker Hub* an.
+Hierbei müssen Sie einen Nutzernamen festlegen.
+Im weiteren Beispiel ist dieser `mide76`.
+
+Legen Sie sich auf der Weboberfläche ein Repository an.
+Dieser Repo-Name ist für das weitere Beispiel `nginx4html`.
+
+Geben Sie den folgenden Befehl ein, um dem Image den Namen `mide76/nginx4html` zu geben:
+```
+docker tag nginx4html mide76/nginx4html
+```
+
+Sie können dann das Image mit folgendem Befehl auf den Server hochladen:
+```
+docker push mide76/nginx4html
+```
+
+Öffentliche URL des Beispiel-Repos: https://hub.docker.com/r/mide76/nginx4html
+
+Andere Nutzer können die neueste Version dieses Image dann mit dem folgenden Befehl herunterladen:
+```
+docker pull mide76/nginx4html:latest
+```
