@@ -206,8 +206,10 @@ Für eine Version `1.1` sieht der Befehl wie folgt aus:
 ```
 sudo docker build -t mide76/nginx4html:1.1 .
 ```
-Der zugehörige `push`-Befehl ist dann wie folgt:
-```
+
+<br>
+
+Der zugehörige `push`-Befehl sieht dann so aus:
 ```
 docker push mide76/nginx4html:1.1
 ```
