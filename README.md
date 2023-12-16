@@ -199,6 +199,21 @@ docker pull mide76/nginx4html:latest
 
 <br>
 
+Wenn wir eine weitere Version des Image auf *Docker Hub* hochladen wollen (z.B. wegen Änderungen
+in `Dockerfile` oder im verpackten Web-Content), dann können wir auch direkt das Image mit dem
+Nutzernamen als Prefix erzeugen.
+Für eine Version `1.1` sieht der Befehl wie folgt aus:
+```
+sudo docker build -t mide76/nginx4html:1.1 .
+```
+Der zugehörige `push`-Befehl ist dann wie folgt:
+```
+```
+docker push mide76/nginx4html:1.1
+```
+
+<br>
+
 ----
 
 ## License ##
