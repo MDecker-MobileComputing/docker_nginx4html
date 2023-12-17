@@ -3,8 +3,8 @@
 <br>
 
 Das Repo enthält im Wurzelverzeichnis ein [Dockerfile](./Dockerfile), welches
-das Image `nginx:stable-alpine3.17-slim` als Basis-Image verwendet, siehe auch
-[hier](https://hub.docker.com/_/nginx/tags) für die Seite dieses Images auf *Docker Hub*.
+das Image [nginx:stable-alpine3.17-slim}(https://hub.docker.com/_/nginx/tags)
+als Basis-Image verwendet.
 Das Image enthält also als Betriebs-System [Alpine Linux](https://www.alpinelinux.org/)
 und den Webserver [nginx](https://nginx.org/en/); bei *Alpine Linux* handelt
 es sich um eine besonders leichtgewichtige Linux-Distribution, die sich besonders
@@ -39,8 +39,9 @@ docker build -t mide76/hallodocker:1.0 .
 * `hallodocker` ist der Name des Images.
   Er darf keine Großbuchstaben enthalten.
 * `1.0` ist die Version, die erstellt wird.
-* Der einzelne Punkt am Ende steht für das aktuelle Verzeichnis.
+* Der einzelne Punkt '.' am Ende steht für das aktuelle Verzeichnis.
   Hier wird nach dem [Dockerfile](./Dockerfile) gesucht.
+* [Doku für diesen Befehl](https://docs.docker.com/engine/reference/commandline/build/)
 
 <br>
 
@@ -49,7 +50,8 @@ die vom folgenden Befehl ausgegeben wird, enthalten sein:
 ```
 docker image ls
 ```
-Das `ls` steht für "list".
+* Das `ls` steht für "list".
+* [Doku für dieses Befehl](https://docs.docker.com/engine/reference/commandline/image_ls/)
 
 <br>
 
@@ -65,6 +67,7 @@ Die Bedeutung der verwendeten Optionen und Argumente ist:
 * `--name mein-webserver-1` : Name des Containers
 * `-p 8080:80` : Der Port 80 des Containers soll an den Port 8080 des "äußeren" Betriebs-System gebunden werden
 * `mide76/hallodocker:1.0`: Image, für das ein Container erzeugt werden soll.
+* [Doku für diesen Befehl](https://docs.docker.com/engine/reference/commandline/run/)
 
 <br>
 
@@ -79,6 +82,7 @@ Die Webseite aus dem Ordner [docs/](docs/) dieses Repos sollte dann unter der fo
 ```
 http://localhost:8080/
 ```
+[Doku für diesen Befehl](https://docs.docker.com/engine/reference/commandline/container_ls/)
 
 <br>
 
@@ -86,6 +90,7 @@ Mit dem folgenden Befehl können wir uns das aktuelle Log-File des Container anz
 ```
 docker container logs mein-webserver-1
 ```
+[Doku für diesen Befehl](https://docs.docker.com/engine/reference/commandline/logs/)
 
 <br>
 
@@ -95,23 +100,32 @@ Es ist auch möglich, eine interaktive Shell im Container zu öffnen:
 ```
 docker exec --interactive --tty mein-webserver-1 sh
 ```
-Hierbei ist das `sh` am Ende der im Container auszuführende Befehl, nämlich die Shell.
+* Das `sh` am Ende ist der im Container auszuführende Befehl, nämlich die Shell.
+* `--interactive`: Interaktive Ausführung
+* `--tty`: Pseudo-Terminal erstellen
+* [Doku für diesen Befehl](https://docs.docker.com/engine/reference/commandline/container_exec/)
 
-Geben Sie den folgenden Befehl ein, um sich anzeigen zu lassen, wie lange der Container schon läuft:
+Geben Sie in der so geöffneten Shell den folgenden Befehl ein, um sich anzeigen zu lassen, wie lange der Container schon läuft:
 ```
 uptime
 ```
 
-Geben Sie z.B. den folgenden Befehl in die so erzeugte interaktive Shell ein, um sich das Inhaltsverzeichnis mit dem Web-Content anzeigen zu lassen:
+Mit dem folgenden Befehl kann man sich den Inhalt des Verzeichnisses mit dem Web-Content ausgeben lassen:
 ```
 ls -l /usr/share/nginx/html/
 ```
+* `ls` steht für den Linux-Befehl "list" (entspricht in etwa dem DOS-Befehl `dir`)
+* `-l`: Detaillierte Anzeige (nicht nur Dateiname, sondern z.B. auch noch Größe der Datei)
+* [Doku zu diesem Befehl](https://www.digitalocean.com/community/tutorials/ls-command-in-linux-unix)
 
 Wir können mit dem folgenden Befehl eine Datei mit dem aktuellen Datum und Uhrzeit
 im Container erzeugen:
 ```
 date > /root/datum.txt
 ```
+Mit dem `>` wird die Ausgabe vom Programm `date` in eine Datei umgeleitet.
+
+<br>
 
 Sie können noch weitere Linux-Befehl eingeben oder die interaktive Shell mit dem Befehl `exit` verlassen.
 
@@ -129,6 +143,7 @@ Die in dem Container laufenden Prozesse können Sie sich mit dem folgenden Befeh
 ```
 docker container top mein-webserver-1
 ```
+[Doku für diesen Befehl](https://docs.docker.com/engine/reference/commandline/container_top/)
 
 Der folgende Befehl listet die Dateien auf, welche sich im Container im Vergleich zu Image geändert haben:
 ```
@@ -143,6 +158,7 @@ Wir können dann den Container mit dem folgenden Befehl beenden:
 ```
 docker container stop mein-webserver-1
 ```
+[Doku zu diesem Befehl](https://docs.docker.com/engine/reference/commandline/container_diff/)
 
 <br>
 
@@ -159,17 +175,20 @@ Wie können den Container mit folgendem Befehl wieder starten:
 docker container start mein-webserver-1
 ```
 Dabei müssen wir das Port-Forwarding nicht erneut spezifizieren.
+[Doku zu diesem Befehl](https://docs.docker.com/engine/reference/commandline/container_start/)
 
 Wenn wir erneut eine interaktive Shell zum Container öffnen, dann können wir uns mit dem folgenden Befehl die während des vorherigen Laufs erzeugte Datei `datum.txt` anzeigen lassen:
 ```
 cat /root/datum.txt
 ```
 Dies zeigt, dass die im Container geänderten Dateien auch erhalten bleiben, wenn der Container gestoppt und neu gestartet wird.
+[Doku zu Linux-Befehl `cat`](https://linux.die.net/man/1/cat)
 
 Die Datei `/root/datum.txt` aus dem Container können Sie sich mit dem folgenden Befehl aus dem Container herauskopieren:
 ```
 docker container cp mein-webserver-1:/root/datum.txt datum-aus-container.txt
 ```
+[Doku zu diesem Befehl](https://docs.docker.com/engine/reference/commandline/container_cp/)
 
 <br>
 
@@ -181,11 +200,13 @@ Der gestoppte Container kann mit folgendem Befehl gelöscht werden:
 ```
 docker container rm mein-webserver-1
 ```
+[Doku zu diesem Befehl](https://docs.docker.com/engine/reference/commandline/container_rm/)
 
 Um *ALLE* gestoppten Container zu löschen kann der folgende Befehl eingegeben werden (gefährlich!):
 ```
 docker container prune
 ```
+[Doku zu diesem Befehl](https://docs.docker.com/engine/reference/commandline/container_prune/)
 
 <br>
 
