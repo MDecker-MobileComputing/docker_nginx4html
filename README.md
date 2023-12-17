@@ -82,7 +82,6 @@ Die Webseite aus dem Ordner [docs/](docs/) dieses Repos sollte dann unter der fo
 ```
 http://localhost:8080/
 ```
-[Doku für diesen Befehl](https://docs.docker.com/engine/reference/commandline/container_ls/)
 
 <br>
 
@@ -105,10 +104,14 @@ docker exec --interactive --tty mein-webserver-1 sh
 * `--tty`: Pseudo-Terminal erstellen
 * [Doku für diesen Befehl](https://docs.docker.com/engine/reference/commandline/container_exec/)
 
+<br>
+
 Geben Sie in der so geöffneten Shell den folgenden Befehl ein, um sich anzeigen zu lassen, wie lange der Container schon läuft:
 ```
 uptime
 ```
+
+<br>
 
 Mit dem folgenden Befehl kann man sich den Inhalt des Verzeichnisses mit dem Web-Content ausgeben lassen:
 ```
@@ -117,6 +120,8 @@ ls -l /usr/share/nginx/html/
 * `ls` steht für den Linux-Befehl "list" (entspricht in etwa dem DOS-Befehl `dir`)
 * `-l`: Detaillierte Anzeige (nicht nur Dateiname, sondern z.B. auch noch Größe der Datei)
 * [Doku zu diesem Befehl](https://www.digitalocean.com/community/tutorials/ls-command-in-linux-unix)
+
+<br>
 
 Wir können mit dem folgenden Befehl eine Datei mit dem aktuellen Datum und Uhrzeit
 im Container erzeugen:
@@ -139,11 +144,15 @@ docker container stats
 ```
 Abbruch dieser Anzeige mit `STRG+C`.
 
+<br>
+
 Die in dem Container laufenden Prozesse können Sie sich mit dem folgenden Befehl ausgeben lassen:
 ```
 docker container top mein-webserver-1
 ```
 [Doku für diesen Befehl](https://docs.docker.com/engine/reference/commandline/container_top/)
+
+<br>
 
 Der folgende Befehl listet die Dateien auf, welche sich im Container im Vergleich zu Image geändert haben:
 ```
@@ -202,6 +211,8 @@ docker container rm mein-webserver-1
 ```
 [Doku zu diesem Befehl](https://docs.docker.com/engine/reference/commandline/container_rm/)
 
+<br>
+
 Um *ALLE* gestoppten Container zu löschen kann der folgende Befehl eingegeben werden (gefährlich!):
 ```
 docker container prune
@@ -219,50 +230,60 @@ docker container prune
 Wenn Sie das Image auf [Docker Hub](https://hub.docker.com/) veröffentlichen möchten, dann gehen Sie wie folgt beschrieben vor.
 Sie können aber auch die [offizielle Dokumentation](https://docs.docker.com/get-started/04_sharing_app/) lesen.
 
+<br>
+
+### Erste Version veröffentlichen ###
+
 Legen Sie sich ein (kostenloses) Konto auf *Docker Hub* an.
 Hierbei müssen Sie einen Nutzernamen festlegen.
 Im weiteren Beispiel ist dieser `mide76`.
 
 Legen Sie sich auf der Weboberfläche ein Repository an.
-Dieser Repo-Name ist für das weitere Beispiel `nginx4html`.
+Dieser Repo-Name ist für das weitere Beispiel `hallodocker`.
 
-Geben Sie den folgenden Befehl ein, um dem Image den Namen `mide76/nginx4html` zu geben (also `<nutzer>/<reponame>`):
-```
-docker tag nginx4html mide76/nginx4html
-```
+<br>
 
 Loggen Sie sich dann auf der Konsole mit Ihrem Docker-Konto ein:
 ```
 docker login
 ```
+[Doku zu diesem Befehl](https://docs.docker.com/engine/reference/commandline/login/
+
+<br>)
 
 Sie können dann das Image mit folgendem Befehl auf den Server hochladen:
 ```
-docker push mide76/nginx4html
+docker push mide76/hallodocker:1.0
 ```
+[Doku zu diesem Befehl](https://docs.docker.com/engine/reference/commandline/push/)
 
-Öffentliche URL des Beispiel-Repos: https://hub.docker.com/r/mide76/nginx4html
+<br>
+
+Öffentliche URL des Beispiel-Repos: https://hub.docker.com/r/mide76/hallodocker
 
 Andere Nutzer können die neueste Version dieses Image dann mit dem folgenden Befehl herunterladen:
 ```
-docker pull mide76/nginx4html:latest
+docker pull mide76/hallodocker:1.0
 ```
+[Doku für diesen Befehl](https://docs.docker.com/engine/reference/commandline/pull/)
 
 <br>
+
+### Weitere Version veröffentlichen ###
 
 Wenn wir eine weitere Version des Image auf *Docker Hub* hochladen wollen (z.B. wegen Änderungen
 in `Dockerfile` oder im verpackten Web-Content), dann können wir auch direkt das Image mit dem
 Nutzernamen als Prefix erzeugen.
 Für eine Version `1.1` sieht der Befehl wie folgt aus:
 ```
-sudo docker build -t mide76/nginx4html:1.1 .
+sudo docker build -t mide76/hallodocker:1.1 .
 ```
 
 <br>
 
 Der zugehörige `push`-Befehl sieht dann so aus:
 ```
-docker push mide76/nginx4html:1.1
+docker push mide76/hallodocker:1.1
 ```
 
 <br>
