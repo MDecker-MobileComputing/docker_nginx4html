@@ -247,9 +247,9 @@ Loggen Sie sich dann auf der Konsole mit Ihrem Docker-Konto ein:
 ```
 docker login
 ```
-[Doku zu diesem Befehl](https://docs.docker.com/engine/reference/commandline/login/
+[Doku zu diesem Befehl](https://docs.docker.com/engine/reference/commandline/login/)
 
-<br>)
+<br>
 
 Sie können dann das Image mit folgendem Befehl auf den Server hochladen:
 ```
@@ -261,7 +261,7 @@ docker push mide76/hallodocker:1.0
 
 Öffentliche URL des Beispiel-Repos: https://hub.docker.com/r/mide76/hallodocker
 
-Andere Nutzer können die neueste Version dieses Image dann mit dem folgenden Befehl herunterladen:
+Andere Nutzer können des Image dann mit dem folgenden Befehl herunterladen:
 ```
 docker pull mide76/hallodocker:1.0
 ```
