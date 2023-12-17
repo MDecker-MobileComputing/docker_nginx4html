@@ -1,5 +1,5 @@
 # Offizielles Base Image für Webserver "nginx", siehe https://hub.docker.com/_/nginx/
-FROM nginx:latest
+FROM nginx:stable-alpine3.17-slim
 
 # Der mit der folgenden Zeile definierte Maintainer wird z.B. mit dem Befehl
 # docker image inspect <imageName> ausgegeben.

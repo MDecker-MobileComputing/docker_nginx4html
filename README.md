@@ -3,9 +3,12 @@
 <br>
 
 Das Repo enthält im Wurzelverzeichnis ein [Dockerfile](./Dockerfile), welches
-das Image `nginx:latest` als Basis-Image verwendet.
-Das Image enthält also als Betriebs-System [Debian Linux](https://www.debian.org/)
-und den Webserver [nginx](https://nginx.org/en/).
+das Image `nginx:stable-alpine3.17-slim` als Basis-Image verwendet, siehe auch
+[hier](https://hub.docker.com/_/nginx/tags) für die Seite dieses Images auf *Docker Hub*.
+Das Image enthält also als Betriebs-System [Alpine Linux](https://www.alpinelinux.org/)
+und den Webserver [nginx](https://nginx.org/en/); bei *Alpine Linux* handelt
+es sich um eine besonders leichtgewichtige Linux-Distribution, die sich besonders
+gut als Grundlage für Container eignet.
 Das `Dockerfile` kopiert den Web-Content aus dem Unterverzeichnis [docs/](docs/)
 in den Ordner `/usr/share/nginx/html/` im Image, weil dies der Ordner für den von
 `nginx` ausgelieferten Web-Content ist.
@@ -22,11 +25,22 @@ in den Ordner `/usr/share/nginx/html/` im Image, weil dies der Ordner für den v
 
 <br>
 
+### Erzeugung Image ###
+
 Führen Sie den folgenden Befehl im Verzeichnis mit dem [Dockerfile](./Dockerfile) aus, um das Image zu erstellen:
 ```
-docker build -t nginx4html:0.9 .
+docker build -t mide76/hallodocker:1.0 .
 ```
-Hierbei ist `nginx4html` der Name des Images und `0.9` die Versionsnummer.
+* Hierbei ist `mide76` der Nutzername auf *Docker Hub*.
+  Wenn Sie das Image nicht auf *Docker Hub* veröffentlichen wollen (siehe unten),
+  dann können Sie das `mide76/` weglassen.
+  Wenn Sie das Image aber veröffentlichen wollen, dann müssen Sie `mide76`
+  durch Ihren eigenen Nutzernamen auf *Docker Hub* veröffentlichen.
+* `hallodocker` ist der Name des Images.
+  Er darf keine Großbuchstaben enthalten.
+* `1.0` ist die Version, die erstellt wird.
+* Der einzelne Punkt am Ende steht für das aktuelle Verzeichnis.
+  Hier wird nach dem [Dockerfile](./Dockerfile) gesucht.
 
 <br>
 
@@ -39,16 +53,18 @@ Das `ls` steht für "list".
 
 <br>
 
+### Erzeugung Container ###
+
 Wie können dann einen Container (laufende Instanz) von diesem Image erzeugen:
 ```
-docker run --detach --name mein-webserver-1 -p 8080:80 nginx4html:0.9
+docker run --detach --name mein-webserver-1 -p 8080:80 mide76/hallodocker:1.0
 ```
 
 Die Bedeutung der verwendeten Optionen und Argumente ist:
 * `--detach` : Container wird im Hintergrund ausgeführt, blockiert also nicht die Shell, mit der der Befehl ausgeführt wurde
 * `--name mein-webserver-1` : Name des Containers
-* `-p 8080:80` : Der Port 80 des Containers soll an den Port 8080 des "äußeren" Betriebssystem gebunden werden
-* `nginx4html:0.9`: Image, für das ein Container erzeugt werden soll.
+* `-p 8080:80` : Der Port 80 des Containers soll an den Port 8080 des "äußeren" Betriebs-System gebunden werden
+* `mide76/hallodocker:1.0`: Image, für das ein Container erzeugt werden soll.
 
 <br>
 
@@ -73,11 +89,18 @@ docker container logs mein-webserver-1
 
 <br>
 
+### Interaktive Shell ###
+
 Es ist auch möglich, eine interaktive Shell im Container zu öffnen:
 ```
 docker exec --interactive --tty mein-webserver-1 sh
 ```
 Hierbei ist das `sh` am Ende der im Container auszuführende Befehl, nämlich die Shell.
+
+Geben Sie den folgenden Befehl ein, um sich anzeigen zu lassen, wie lange der Container schon läuft:
+```
+uptime
+```
 
 Geben Sie z.B. den folgenden Befehl in die so erzeugte interaktive Shell ein, um sich das Inhaltsverzeichnis mit dem Web-Content anzeigen zu lassen:
 ```
@@ -94,10 +117,13 @@ Sie können noch weitere Linux-Befehl eingeben oder die interaktive Shell mit de
 
 <br>
 
+### Überwachung laufender Container ###
+
 Während ein oder mehrere Container laufen, können Sie mit dem folgenden Befehl den Ressourcenverbrauch (z.B. CPU und RAM) der einzelnen Container anzeigen lassen:
 ```
 docker container stats
 ```
+Abbruch dieser Anzeige mit `STRG+C`.
 
 Die in dem Container laufenden Prozesse können Sie sich mit dem folgenden Befehl ausgeben lassen:
 ```
@@ -111,7 +137,9 @@ docker container diff mein-webserver-1
 
 <br>
 
-Wie können dann den Container mit dem folgenden Befehl beenden:
+### Container stoppen und neu starten ###
+
+Wir können dann den Container mit dem folgenden Befehl beenden:
 ```
 docker container stop mein-webserver-1
 ```
@@ -144,6 +172,8 @@ docker container cp mein-webserver-1:/root/datum.txt datum-aus-container.txt
 ```
 
 <br>
+
+### Container löschen ###
 
 Wir stoppen den Container erneut mit dem selben Befehl wie oben.
 
