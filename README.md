@@ -288,6 +288,46 @@ docker push mide76/hallodocker:1.1
 
 <br>
 
+Es ist Konvention, der aktuellsten stabilen Version eines Images noch den Tag `latest` zu geben.
+Dies können wir für die gerade erstellte Version `1.1` mit folgendem Befehl machen:
+```
+docker tag mide76/hallodocker:1.1 mide76/hallodocker:latest
+```
+[Doku zum Befehl](https://docs.docker.com/engine/reference/commandline/tag/)
+
+<br>
+
+Mit dem letzten Befehl wurde der Tag aber nur lokal angelegt.
+Damit dieser Tag auch im Repositry auf *Docker Hub* verfügbar ist, muss
+er gepusht werden:
+```
+docker push mide76/hallodocker:latest
+```
+
+<br>
+
+Dieser Tag und die beiden Versionen werden dann im Tab "Tags" des Repos auf
+*Docker Hub* angezeigt, siehe [hier](https://hub.docker.com/repository/docker/mide76/hallodocker/tags?page=1&ordering=last_updated).
+Wenn zwei Tags den gleichen (Hash-)Wert für "Digest" haben, dann handelt es sich um dieselbe Version.
+
+<br>
+
+Wenn wir später noch eine Version `1.2` des Image erstellen, dann können wir mit dem folgenden
+Befehl den Tag `latest` von der Version `1.1.` zu der Version `1.2.` verschieben:
+```
+docker tag mide76/hallodocker:1.2 mide76/hallodocker:latest
+```
+Durch Anhängen des Tag `latest` an eine andere Version wird der Tag von der bisherigen Version `1.1` entfernt.
+
+Wir müssen dann noch das neue Image mit den beiden Tags `1.2` und `latest` zu *Docker Hub* pushen:
+```
+docker push mide76/hallodocker:1.2
+docker push mide76/hallodocker:latest
+```
+
+
+<br>
+
 ----
 
 ## License ##
