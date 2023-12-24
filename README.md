@@ -3,7 +3,7 @@
 <br>
 
 Das Repo enthält im Wurzelverzeichnis ein [Dockerfile](./Dockerfile), welches
-das Image [nginx:stable-alpine3.17-slim}(https://hub.docker.com/_/nginx/tags)
+das Image [nginx:stable-alpine3.17-slim](https://hub.docker.com/_/nginx/tags)
 als Basis-Image verwendet.
 Das Image enthält also als Betriebs-System [Alpine Linux](https://www.alpinelinux.org/)
 und den Webserver [nginx](https://nginx.org/en/); bei *Alpine Linux* handelt
