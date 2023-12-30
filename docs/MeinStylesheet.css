@@ -12,3 +12,7 @@ h1 {
 .fett {
     font-weight: bold;
 }
+
+li {
+    margin-bottom: 1em;
+}

@@ -23,3 +23,6 @@ COPY ./docs/* /usr/share/nginx/html/
 # siehe https://forums.docker.com/t/docker-build-with-alpine-fails-to-run-apk/77838/4
 RUN apk update
 RUN apk add joe
+
+EXPOSE 80
+
