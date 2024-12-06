@@ -1,6 +1,6 @@
 # Offizielles Base Image für Webserver "nginx", siehe https://hub.docker.com/_/nginx/
 # Doku zum Befehl: https://docs.docker.com/engine/reference/builder/#from
-FROM nginx:stable-alpine3.17-slim
+FROM nginx:alpine
 
 
 # Der mit der folgenden Zeile definierte Maintainer wird z.B. mit dem Befehl
@@ -25,4 +25,3 @@ RUN apk update
 RUN apk add joe
 
 EXPOSE 80
-

@@ -106,11 +106,6 @@ docker exec --interactive --tty mein-webserver-1 sh
 
 <br>
 
-Geben Sie in der so geöffneten Shell den folgenden Befehl ein, um sich anzeigen zu lassen, wie lange der Container schon läuft:
-```
-uptime
-```
-
 <br>
 
 Mit dem folgenden Befehl kann man sich den Inhalt des Verzeichnisses mit dem Web-Content ausgeben lassen:
