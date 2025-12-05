@@ -21,13 +21,15 @@ in den Ordner `/usr/share/nginx/html/` im Image, weil dies der Ordner für den v
 
 <br>
 
-**Vorbemerkung:** Unter Linux müssen Sie für die folgenden Aufrufe von `docker` evtl. den Befehl `sudo` voranstellen.
+**Vorbemerkung:**
+Unter Linux müssen Sie für die folgenden Aufrufe von `docker` evtl. den Befehl `sudo` voranstellen.
 
 <br>
 
 ### Erzeugung Image ###
 
-Führen Sie den folgenden Befehl im Verzeichnis mit dem [Dockerfile](./Dockerfile) aus, um das Image zu erstellen:
+Führen Sie den folgenden Befehl im Verzeichnis mit dem [Dockerfile](./Dockerfile) aus, um das Image
+zu erstellen:
 ```
 docker build -t mide76/hallodocker:1.0 .
 ```
@@ -45,8 +47,8 @@ docker build -t mide76/hallodocker:1.0 .
 
 <br>
 
-Nach einem erfolgreichen Lauf dieses Befehls sollte das neu erzeugte Image in der Liste aller lokalen Images,
-die vom folgenden Befehl ausgegeben wird, enthalten sein:
+Nach einem erfolgreichen Lauf dieses Befehls sollte das neu erzeugte Image in der Liste aller
+lokalen Images, die vom folgenden Befehl ausgegeben wird, enthalten sein:
 ```
 docker image ls
 ```
@@ -319,7 +321,6 @@ Wir müssen dann noch das neue Image mit den beiden Tags `1.2` und `latest` zu *
 docker push mide76/hallodocker:1.2
 docker push mide76/hallodocker:latest
 ```
-
 
 <br>
 
