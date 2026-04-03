@@ -27,5 +27,5 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ toLower(github.repository) }}:latest
+          tags: ghcr.io/mdecker_mobilecomputing/nginx-mit-custom-html:latest
 
