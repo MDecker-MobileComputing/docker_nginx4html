@@ -41,3 +41,6 @@ jobs:
 
 # Webseite mit gepushten Docker-Image:
 # https://github.com/MDecker-MobileComputing/docker_nginx4html/pkgs/container/nginx-mit-custom-html/
+
+# Images auf "Private" setzen (zählen dann zu 500 MB Package-Quota)
+# https://github.com/users/MDecker-MobileComputing/packages/container/nginx-mit-custom-html/settings
