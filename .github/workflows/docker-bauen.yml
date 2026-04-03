@@ -22,13 +22,21 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Set image tag
-        run: echo "IMAGE_TAG=ghcr.io/$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')/nginx-mit-custom-html:latest" >> $GITHUB_ENV
+      - name: Set image tags
+        run: |
+          ZEITSTEMPEL=$(date -u +"%Y-%m-%d_%H-%M")
+          OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+          echo "IMAGE_TAG=ghcr.io/${OWNER}/nginx-mit-custom-html:${ZEITSTEMPEL}" >> $GITHUB_ENV
+          echo "IMAGE_TAG_LATEST=ghcr.io/${OWNER}/nginx-mit-custom-html:latest" >> $GITHUB_ENV
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
           context: .
           push: true
-          tags: ${{ env.IMAGE_TAG }}
+          tags: |
+            ${{ env.IMAGE_TAG }}
+            ${{ env.IMAGE_TAG_LATEST }}
 
+# Webseite mit gepushten Docker-Image:
+# https://github.com/MDecker-MobileComputing/docker_nginx4html/pkgs/container/nginx-mit-custom-html/
