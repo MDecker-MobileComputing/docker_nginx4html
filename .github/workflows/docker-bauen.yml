@@ -44,3 +44,6 @@ jobs:
 
 # Images auf "Private" setzen (zählen dann zu 500 MB Package-Quota)
 # https://github.com/users/MDecker-MobileComputing/packages/container/nginx-mit-custom-html/settings
+
+# Image pullen mit Docker-CLI:
+# docker pull ghcr.io/mdecker-mobilecomputing/nginx-mit-custom-html:latest
