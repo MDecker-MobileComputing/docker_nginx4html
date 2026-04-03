@@ -1,5 +1,6 @@
 name: Docker-Container bauen
 
+# Kann nur auf manuelle Anforderung ausgeführt werden, damit nicht bei jedem Push ein neues Image gebaut wird.
 on:
   workflow_dispatch:
 
@@ -30,7 +31,7 @@ jobs:
           echo "IMAGE_TAG_LATEST=ghcr.io/${OWNER}/nginx-mit-custom-html:latest" >> $GITHUB_ENV
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: .
           push: true
